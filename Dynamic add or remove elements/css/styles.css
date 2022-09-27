@@ -3,54 +3,10 @@
     padding: 0px;
     box-sizing: border-box;
     color: black;
-}
-.heading {
-    color: antiquewhite;
-    font-size: 2rem;
-    padding: 1rem;
+    font-family: 'Ubuntu', sans-serif;
 }
 
-.input {
-    margin:1rem;
-}
-
-.loginForm{
-    /* background-image: linear-gradient(to right, #7C98B3 , #637081);  */
-    padding: 8rem;
-    margin: 8rem;
-    display: flex;
-    flex-direction: row;
-    /* justify-content: space-between; */
-    /* border-radius: 5rem 2rem 5rem 2rem; */
-    /* border: 2px solid black; */
-}
-
-.myInput {
-    margin-top: 3rem;
-    color: black;
-    padding: 1rem;
-    margin-left: 3rem;
-    border-radius: 1rem;
-}
-button {
-    border-radius: 1rem;
-    padding: 1rem;
-    margin: 1rem;
-}
-button:hover{
-    background-color: black;
-    color: white;
-}
 .error {
     color: rgb(7, 7, 7);
     padding-left: 10px;
-    margin-left: 3rem;
-}
-
-#formInputs {
-
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-    border: 2px solid black;
 }

@@ -11,81 +11,47 @@ $(document).ready(function () {
         "Email in proper format"
     );
 
-
-
-
-
-
-
-
     // form validation
-    const validationFunction = (() => {
-        $("#myForm").validate({
-            rules: {
-                name: {
-                    required: true,
-                    minlength: 2
-                },
-                email: {
-                    required: {
-                        depends: function () {
-                            $(this).val($.trim($(this).val()));
-                            return true;
-                        }
-                    },
-                    customemail: true
-                },
-                phone: {
-                    required: true,
-                    number: true,
-                    minlength: 10,
-                    maxlength: 10
-                }
+
+    $("#myForm").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 2
             },
-            messages: {
-                name: {
-                    required: "Enter Name",
-                    minlength: jQuery.validator.format("At least {0} char required")
+            email: {
+                required: {
+                    depends: function () {
+                        $(this).val($.trim($(this).val()));
+                        return true;
+                    }
                 },
-                email: {
-                    required: "Enter Email",
-                    email: "Email in format"
-                },
-                phone: {
-                    required: "Enter Phone",
-                    number: "Phone no should be in number",
-                    minlength: "Enter 10 digits",
-                    maxlength: "Enter 10 digits"
-                }
+                customemail: true
+            },
+            phone: {
+                required: true,
+                number: true,
+                minlength: 10,
+                maxlength: 10
             }
-        });
-    })
-   // validationFunction()
-    $("#myForm").validate();
-        validationRules();
-
-
-
-
-    function validationRules() {
-console.log('2');
-        $(".emailInput").each((i, e) => {
-            $(e).rules("add", { required: true, email: email })
-        })
-        console.log('3');
-        $(".nameInput").each((i, e) => {
-            $(e).rules("add", { required: true, minlength: 2 })
-        })
-
-        $(".phoneInput").each((i, e) => {
-            $(e).rules("add", { required: true, minlength: 10, maxlength: 10, number: true })
-        })
-
-    }
-
-     
-
-
+        },
+        messages: {
+            name: {
+                required: "Enter Name",
+                minlength: jQuery.validator.format("At least {0} char required")
+            },
+            email: {
+                required: "Enter Email",
+                email: "Email in format"
+            },
+            phone: {
+                required: "Enter Phone",
+                number: "Phone no should be in number",
+                minlength: "Enter 10 digits",
+                maxlength: "Enter 10 digits"
+            }
+        }
+    });
 
 
 
@@ -95,7 +61,8 @@ console.log('2');
     $("#addButton").click((e) => {
         // e.preventDefault();
         $("#myForm").prepend(`
-       
+        <form id="myForm" action="#">
+
             <div class="row">
                 <div class="col-md-3 mb-4">
                     <input id="email" type="text" name="email" class="form-control emailInput" placeholder="Email"
@@ -114,19 +81,16 @@ console.log('2');
                 <button class="btn btn-danger deleteButton col-md-2 mb-5">Delete</button>
             </div>
 
-        `);
-        console.log('1');
+        </form>`);
+
         $('input[placeholder]').placeholderLabel();
-        $("#myForm").validate().resetForm();
-        validationRules();
-       //validationFunction()
 
     })
 
     // delete button
     $(document).on('click', '.deleteButton', function (e) {
         // e.preventDefault();
-        var deleteBtn = $(this).parent();
+        var deleteBtn = $(this).parent().parent();
         $(deleteBtn).remove();
     })
 
@@ -166,6 +130,5 @@ console.log('2');
         $("#showJson").html(str);
 
     })
-
 
 })
