@@ -13,5 +13,6 @@ Dynamically add and remove elements using jQuery
 
 ![image](https://user-images.githubusercontent.com/56589966/192339975-14f44a0e-4f1e-488c-9d50-693cb56b9bb0.png)
 
+# Validation for all the fields
+![image](https://user-images.githubusercontent.com/56589966/192817265-d6e9ba00-012d-47bf-9814-c95037992a56.png)
 
-![image](https://user-images.githubusercontent.com/56589966/192569276-264fd696-2853-439d-bcf8-2c2d6dc4ffed.png)
