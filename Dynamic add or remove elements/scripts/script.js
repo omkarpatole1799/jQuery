@@ -1,8 +1,11 @@
-console.log("hello world")
+console.log("hello world");
 
 $(document).ready(function () {
 
+    // placeholder label
     $('input[placeholder]').placeholderLabel();
+
+    // regex custom email validation
 
     $.validator.addMethod("customemail",
         function (value, element) {
@@ -11,20 +14,14 @@ $(document).ready(function () {
         "Email in proper format"
     );
 
-
-
-
-
-
-
-
     // form validation
     const validationFunction = (() => {
         $("#myForm").validate({
             rules: {
                 name: {
                     required: true,
-                    minlength: 2
+                    minlength: 2,
+                    number: false
                 },
                 email: {
                     required: {
@@ -53,86 +50,59 @@ $(document).ready(function () {
                 },
                 phone: {
                     required: "Enter Phone",
-                    number: "Phone no should be in number",
+                    number: "Phone no in number",
                     minlength: "Enter 10 digits",
                     maxlength: "Enter 10 digits"
                 }
             }
         });
     })
-   // validationFunction()
-    $("#myForm").validate();
-        validationRules();
 
-
-
-
-    function validationRules() {
-console.log('2');
-        $(".emailInput").each((i, e) => {
-            $(e).rules("add", { required: true, email: email })
-        })
-        console.log('3');
-        $(".nameInput").each((i, e) => {
-            $(e).rules("add", { required: true, minlength: 2 })
-        })
-
-        $(".phoneInput").each((i, e) => {
-            $(e).rules("add", { required: true, minlength: 10, maxlength: 10, number: true })
-        })
-
-    }
-
-     
-
-
-
-
-
+    // calling the validate function
+    validationFunction();
 
     // clone div
-
+    var count = 1;
     $("#addButton").click((e) => {
-        // e.preventDefault();
-        $("#myForm").prepend(`
-       
-            <div class="row">
-                <div class="col-md-3 mb-4">
-                    <input id="email" type="text" name="email" class="form-control emailInput" placeholder="Email"
-                        required>
-                </div>
+        e.preventDefault();
+        count++;
 
-                <div class="col-md-3 mb-4">
-                    <input id="name" type="text" name="name" class="form-control nameInput" placeholder="Name"
-                        required>
-                </div>
+        $("#myForm").prepend(
 
-                <div class="col-md-3 mb-4">
-                    <input id="phone" type="text" name="phone" class="form-control phoneInput" placeholder="Phone"
-                        required>
-                </div>
-                <button class="btn btn-danger deleteButton col-md-2 mb-5">Delete</button>
+            `<div class="row">
+            <div class="col-md-3 mb-4">
+                <input id="email`+ count + `" type="text" name="email" class="form-control emailInput" placeholder="Email"
+                    required>
             </div>
 
-        `);
-        console.log('1');
-        $('input[placeholder]').placeholderLabel();
-        $("#myForm").validate().resetForm();
-        validationRules();
-       //validationFunction()
+            <div class="col-md-3 mb-4">
+                <input id="name`+ count + `" type="text" name="name" class="form-control nameInput" placeholder="Name"
+                    required>
+            </div>
 
+            <div class="col-md-3 mb-4">
+                <input id="phone`+ count + `" type="text" name="phone" class="form-control phoneInput" placeholder="Phone"
+                    required>
+            </div>
+            <button class="btn btn-danger deleteButton col-md-2 mb-5">Delete</button>
+
+        </div>`);
+
+        // recalling placeholder label function
+        $('input[placeholder]').placeholderLabel();
+
+        $("#myForm").validate().resetForm();
+
+        // recalling the validate function
+        validationFunction();
     })
+
 
     // delete button
     $(document).on('click', '.deleteButton', function (e) {
         // e.preventDefault();
         var deleteBtn = $(this).parent();
         $(deleteBtn).remove();
-    })
-
-    $("#resetButton").click(function (e) {
-        e.preventDefault();
-        $("#myForm").reset();
     })
 
 
@@ -166,6 +136,5 @@ console.log('2');
         $("#showJson").html(str);
 
     })
-
 
 })
