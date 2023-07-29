@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery practice</title>
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+      // date picker
+      $(function(){
+        $("#datepicker").datepicker();
+      })
+      
+      // radio buttons
+      
+      $(function(){
+        $("input").checkboxradio();
+      })
+
+      // Accordion
+      $(function () {
+        $("#accordion").accordion({
+          collapsible: true
+        });
+      });
+    </script>
+  </head>
+  <body>
+
+    <!-- date picker -->
+    <label for="date"></label>
+    <input type="text" name="date" id="datepicker">
+
+    <!-- checkbox radio -->
+    <fieldset>
+      <label for="radio-1">India</label>
+      <input type="radio" name="radio-1" id="radio-1">
+
+      <label for="radio-2">UK</label>
+      <input type="radio" name="radio-2" id="radio-2">
+    </fieldset>
+
+    <!-- accordion -->
+    <div id="accordion">
+      <h3>Section 1</h3>
+      <div>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci
+          quasi tempora labore esse. Illum ipsam ut, voluptatem obcaecati
+          facilis voluptatibus!
+        </p>
+      </div>
+
+      <h3>Section 2</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus aut
+        eius vitae.
+      </p>
+
+      <h3>Section 3</h3>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta nulla
+        nostrum repellat eligendi voluptatem blanditiis.
+      </p>
+    </div>
+  </body>
+</html>
