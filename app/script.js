@@ -34,27 +34,19 @@ $.ajax({
 
 $("#add-product-btn").on("click", function (e) {
     e.preventDefault();
-
     const formDataObj = new FormData();
-
-    let formData = $("#add-product-form").serializeArray();
-
-    $.each(formData, function (i, el) {
-        formDataObj.append(el.name, el.value);
-    });
-
-    let fileData = $("input[name='itemPhoto']")[0].files[0];
-    formDataObj.append("image", fileData, "image.png");
-
-    console.log(Array.from(formDataObj));
+    formDataObj.append("itemName", $("#item-name").val());
+    formDataObj.append("itemDescription", $("#item-description").val());
+    formDataObj.append("itemPrice", $("#item-price").val());
+    formDataObj.append("itemPhoto", $("#item-photo")[0].files[0]);
 
     // post form data
     $.ajax({
         url: "http://localhost:3000/product-data/add",
         type: "POST",
-        // dataType: "json",
-        // contentType: "application/json",
-        data: JSON.stringify(Array.from(formDataObj)),
+        data: formDataObj,
+        processData: false,
+        contentType: false,
         success: function () {
             console.log("success");
         },
@@ -94,14 +86,16 @@ $("body").on("click", ".edit-button", function () {
             $("#item-price1").val(data.price);
 
             $("body").on("click", "#update-product-btn", function (e) {
-                // e.preventDefault();
-                const productData = {
-                    itemId: data.id,
-                    itemName: $("#item-name1").val(),
-                    itemDescription: $("#item-description1").val(),
-                    itemPrice: $("#item-price1").val(),
-                };
-                postUpdateData(productData);
+                e.preventDefault();
+                const formDataObj = new FormData();
+
+                formDataObj.append("itemName", $("#item-name1").val());
+                formDataObj.append("itemDescription",$("#item-description1").val());
+                formDataObj.append("itemPrice", $("#item-price1").val());
+                formDataObj.append("itemPhoto", $("#item-photo1")[0].files[0]);
+                formDataObj.append("itemId", data.id);
+                let id = data.id;
+                postUpdateData(formDataObj, id);
             });
         },
         error: function (err) {
@@ -110,13 +104,13 @@ $("body").on("click", ".edit-button", function () {
     });
 });
 
-function postUpdateData(productData) {
+function postUpdateData(formDataObj, id) {
     $.ajax({
-        url: `http://localhost:3000/product-data/update/${productData.id}`,
+        url: `http://localhost:3000/product-data/update/${id}`,
         type: "POST",
-        dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify(productData),
+        data: formDataObj,
+        processData: false,
+        contentType: false,
         success: function () {
             console.log("success");
         },
@@ -163,6 +157,16 @@ function getUpdateForm(id) {
                     />
                 </div>
 
+                <div class="mb-3">
+                    <label for="item-photo" class="form-label">Photo</label>
+                    <input 
+                        name="itemPhoto"
+                        type="file"
+                        class="form-control"
+                        id="item-photo1"
+                    />
+                </div>
+
                 <a  
                     href="/"
                     id="update-product-btn"
@@ -181,6 +185,7 @@ $("#upload-file").on("click", function (e) {
     console.log(file);
     let formDataOjb = new FormData();
     formDataOjb.append("inputFile", file);
+
     $.ajax({
         url: "http://localhost:3000/upload/file",
         type: "POST",
